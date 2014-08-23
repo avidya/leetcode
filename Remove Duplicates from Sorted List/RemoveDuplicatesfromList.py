@@ -19,15 +19,16 @@ class Solution:
     def deleteDuplicates(self, head):
         if not head or not head.next:
             return head
-        now=head
-        next_elem=now.next
-        while True:
-            if not next_elem:
-                return head
-            elif next_elem.val > now.val:
-                now.next=next_elem
-                now=next_elem
-                next_elem=now.next
+        prev=head
+        now=head.next
+        d={head.val:1}
+        while now:
+            if d.has_key(now.val):
+                prev.next=None
+                now=now.next
             else:
-                next_elem=next_elem.next
-                now.next=None
+                d[now.val]=1
+                prev.next=now
+                prev=now
+                now=now.next
+        return head

@@ -20,39 +20,23 @@ class Solution:
         if not head or not head.next:
             return head
         prev=None
-        now=head.next
-        d={}
-        while now:
-            if d.has_key(now.val):
-                if prev:
-                    prev.next=now.next
-                else:
-                    head=now.next
-            else:    
-                p1=None
-                p2=head
-                flag=False
-                while p2 != now:
-                    if p2.val == now.val:
-                        d[now.val]=1
-                        if p2.next != now:
-                            if p1:
-                                p1.next=p2.next
-                            else:
-                                head=p2.next
-                        else:
-                            flag=True
-                            if p1:
-                                prev=p1
-                                p1.next=now.next
-                            else:
-                                prev=None
-                                head=now.next
-                        break
-                    else:
-                        p1=p2
-                        p2=p2.next
-                if not flag:
+        now=head
+        next_elem=now.next
+        while True:
+            if not next_elem:
+                return head
+            elif next_elem.val > now.val:
+                if now.next == next_elem:
                     prev=now
-            now=now.next
-        return head
+                else:
+                    if prev:
+                        prev.next=next_elem
+                    else:
+                        head=next_elem
+                now=next_elem
+            else:
+                if prev:
+                    prev.next=None
+                else:
+                    head=None
+            next_elem=next_elem.next
