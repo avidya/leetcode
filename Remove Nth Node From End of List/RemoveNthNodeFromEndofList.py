@@ -20,5 +20,22 @@ class Solution:
 
     # @return a ListNode
     def removeNthFromEnd(self, head, n):
-
-        
+        if not head:
+            return head
+        count=n
+        p1=head
+        p2=None
+        while count > 0:
+            count-=1
+            p1=p1.next
+        while p1:
+            p1=p1.next
+            if p2:
+                p2=p2.next
+            else:
+                p2=head
+        if p2:
+            p2.next=p2.next.next
+            return head
+        else:
+            return head.next

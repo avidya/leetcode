@@ -18,11 +18,18 @@ class Solution:
     def detectCycle(self, head):
         slow=head
         fast=head
+        ring=False
         while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
-            print slow.val
-            print fast.val
             if slow == fast:
-                return slow
-        return None
+                ring=True
+                break
+        if not ring:
+            return None
+        else:
+            slow=head
+            while slow != fast:
+                slow=slow.next
+                fast=fast.next
+            return slow
