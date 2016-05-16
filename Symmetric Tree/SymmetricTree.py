@@ -31,8 +31,12 @@ class Solution:
     def isSymmetric(self, root):
         if not root:
             return True
-        lnodes=[root]
-        rnodes=[root]
+        if (root.left == None) ^ (root.right == None):
+            return False
+        if (root.left == None) and (root.right == None):
+            return True
+        lnodes=[root.left]
+        rnodes=[root.rigth]
         while lnodes:
             lnode=lnodes.pop()
             if not rnodes:
